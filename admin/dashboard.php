@@ -10,6 +10,24 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
 
 $conn = getConnection();
 
+// Handle job approval/rejection
+if (isset($_POST['action']) && isset($_POST['job_id'])) {
+    $action = $_POST['action'];
+    $jobId = (int)$_POST['job_id'];
+    
+    if ($action === 'approve' || $action === 'reject') {
+        $status = ($action === 'approve') ? 'approved' : 'rejected';
+        $sql = "UPDATE jobs SET approval_status = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $status, $jobId);
+        $stmt->execute();
+        
+        // Redirect to refresh the page
+        header('Location: dashboard.php');
+        exit();
+    }
+}
+
 // Get statistics
 $stats = array();
 
@@ -43,13 +61,23 @@ $recent_users = $conn->query($recent_users_sql);
 
 // Recent jobs
 $recent_jobs_sql = "SELECT 
-    j.id, j.title, j.status, j.created_at,
+    j.id, j.title, j.status, j.created_at, j.approval_status,
     cp.company_name
     FROM jobs j
     JOIN company_profiles cp ON j.company_id = cp.id
     ORDER BY j.created_at DESC
     LIMIT 10";
 $recent_jobs = $conn->query($recent_jobs_sql);
+
+// Pending jobs for approval
+$pending_jobs_sql = "SELECT 
+    j.id, j.title, j.type, j.location, j.created_at,
+    cp.company_name
+    FROM jobs j
+    JOIN company_profiles cp ON j.company_id = cp.id
+    WHERE j.approval_status = 'pending'
+    ORDER BY j.created_at ASC";
+$pending_jobs = $conn->query($pending_jobs_sql);
 
 // Job categories
 $categories_sql = "SELECT 
@@ -216,7 +244,8 @@ $categories = $conn->query($categories_sql);
     </style>
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+<?php include("includes/bootstrap_header.php"); ?>
+
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -276,8 +305,8 @@ $categories = $conn->query($categories_sql);
                                     </td>
                                     <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
                                     <td>
-                                        <a href="edit-user.php?id=<?php echo $user['id']; ?>" class="btn btn-primary">Edit</a>
-                                        <button onclick="deleteUser(<?php echo $user['id']; ?>)" class="btn btn-danger">Delete</button>
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="approveUser(<?php echo $user['id']; ?>)">Approve User</button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteUser(<?php echo $user['id']; ?>)">Delete</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -312,8 +341,8 @@ $categories = $conn->query($categories_sql);
                                     </td>
                                     <td><?php echo date('M d, Y', strtotime($job['created_at'])); ?></td>
                                     <td>
-                                        <a href="edit-job.php?id=<?php echo $job['id']; ?>" class="btn btn-primary">Edit</a>
-                                        <button onclick="deleteJob(<?php echo $job['id']; ?>)" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="approveJob(<?php echo $job['id']; ?>)">Approve Job</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteJob(<?php echo $job['id']; ?>)">Delete</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -344,6 +373,39 @@ $categories = $conn->query($categories_sql);
     <?php include '../includes/footer.php'; ?>
 
     <script>
+        function approveUser(userId) {
+    // AJAX request to approve user
+    fetch('edit_user.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'user_id=' + userId + '&action=approve'
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Handle success or error
+        alert("User Approved");
+        location.reload(); // Reload the page to see changes
+    });
+}
+
+function approveJob(jobId) {
+    // AJAX request to approve job
+    fetch('manage_jobs.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'job_id=' + jobId + '&action=approve'
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Handle success or error
+        alert("Job Approved");
+        location.reload(); // Reload the page to see changes
+    });
+}
         // Tab switching functionality
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');

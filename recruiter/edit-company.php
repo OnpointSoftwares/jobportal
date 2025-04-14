@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/admin_header.php'; ?>
 
     <div class="profile-container">
         <h1 style="margin-bottom: 2rem;"><?php echo $company ? 'Edit' : 'Create'; ?> Company Profile</h1>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php endif; ?>
 
         <div class="form-section">
-            <form action="company-profile.php" method="POST" enctype="multipart/form-data">
+            <form action="edit-company.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="company_name">Company Name*</label>
                     <input type="text" id="company_name" name="company_name" 
@@ -244,7 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/bootstrap_footer.php'; ?>
 
     <script>
         function previewLogo(input) {

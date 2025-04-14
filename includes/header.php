@@ -14,9 +14,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="companies.php" <?php echo $current_page == 'companies.php' ? 'class="active"' : ''; ?>>Companies</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <?php if ($_SESSION['user_type'] == 'recruiter'): ?>
-                    <li><a href="recruiter/dashboard.php">Dashboard</a></li>
-                <?php else: ?>
-                    <li><a href="jobseeker/dashboard.php">Dashboard</a></li>
+                    <li><a href="../recruiter/dashboard.php">Dashboard</a></li>
+                <?php elseif ($_SESSION['user_type'] == 'jobseeker'): ?>
+                    <li><a href="../jobseeker/dashboard.php">Dashboard</a></li>
+                <?php elseif ($_SESSION['user_type'] == 'admin'): ?>
+                    <li><a href="../admin/dashboard.php">Dashboard</a></li>
                 <?php endif; ?>
                 <li><a href="logout.php" class="btn-login">Logout</a></li>
             <?php else: ?>

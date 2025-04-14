@@ -194,7 +194,7 @@ if ($company) {
     </style>
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/admin_header.php'; ?>
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -241,7 +241,7 @@ if ($company) {
                 <div class="company-section">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div>
-                            <img src="<?php echo htmlspecialchars($company['logo_path'] ?? '../images/default-company-logo.png'); ?>" alt="Company Logo" class="company-logo">
+                            <img src="<?php echo "../".htmlspecialchars($company['logo_path'] ?? '../images/default-company-logo.png'); ?>" alt="Company Logo" class="company-logo">
                             <h2><?php echo htmlspecialchars($company['company_name']); ?></h2>
                             <p><?php echo nl2br(htmlspecialchars($company['description'])); ?></p>
                         </div>
@@ -316,7 +316,7 @@ if ($company) {
         <?php endif; ?>
     </div>
 
-    <?php include '../includes/footer.php'; ?>
+    <?php include '../includes/bootstrap_footer.php'; ?>
 
     <script>
         // Tab switching functionality

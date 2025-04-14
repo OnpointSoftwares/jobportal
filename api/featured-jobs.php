@@ -16,7 +16,7 @@ try {
                 cp.logo_path
             FROM jobs j
             INNER JOIN company_profiles cp ON j.company_id = cp.id
-            WHERE j.status = 'open'
+            WHERE j.status = 'open' AND j.approval_status = 'approved'
             ORDER BY j.created_at DESC
             LIMIT 6";
     

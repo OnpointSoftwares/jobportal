@@ -19,7 +19,7 @@ try {
                 cp.logo_path
             FROM jobs j
             INNER JOIN company_profiles cp ON j.company_id = cp.id
-            WHERE j.status = 'open'
+            WHERE j.status = 'open' AND j.approval_status = 'approved'
             AND (j.title LIKE ? OR j.description LIKE ? OR cp.company_name LIKE ?)
             AND j.location LIKE ?
             ORDER BY j.created_at DESC

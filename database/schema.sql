@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     type ENUM('full-time', 'part-time', 'contract', 'internship') NOT NULL,
     salary_range VARCHAR(50),
     status ENUM('open', 'closed') DEFAULT 'open',
+    approval_status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (company_id) REFERENCES company_profiles(id) ON DELETE CASCADE

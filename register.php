@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/bootstrap_header.php'; ?>
 
     <div class="register-container">
         <h2 style="text-align: center; margin-bottom: 2rem;">Create an Account</h2>
@@ -183,6 +183,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php
+    include('includes/footer.php');
+    ?>
 </body>
 </html>

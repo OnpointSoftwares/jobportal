@@ -26,8 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirect based on user type
             if ($user['user_type'] == 'recruiter') {
                 header("Location: recruiter/dashboard.php");
-            } else {
+            } else if ($user['user_type'] == 'jobseeker') {
                 header("Location: jobseeker/dashboard.php");
+            } else if ($user['user_type'] == 'admin') {
+                header("Location: admin/dashboard.php");
             }
             exit();
         } else {
@@ -117,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/bootstrap_header.php'; ?>
 
     <div class="login-container">
         <h2 style="text-align: center; margin-bottom: 2rem;">Login to Job Portal</h2>

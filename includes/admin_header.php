@@ -105,17 +105,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>" href="index.php">
+                        <a class="nav-link <?php echo $current_page == 'index.php' ? 'active' : ''; ?>" href="../index.php">
                             <i class="fas fa-home"></i> Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page == 'jobs.php' ? 'active' : ''; ?>" href="jobs.php">
+                        <a class="nav-link <?php echo $current_page == 'jobs.php' ? 'active' : ''; ?>" href="../jobs.php">
                             <i class="fas fa-briefcase"></i> Jobs
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page == 'companies.php' ? 'active' : ''; ?>" href="companies.php">
+                        <a class="nav-link <?php echo $current_page == 'companies.php' ? 'active' : ''; ?>" href="../companies.php">
                             <i class="fas fa-building"></i> Companies
                         </a>
                     </li>
@@ -128,12 +128,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <?php if ($_SESSION['user_type'] == 'admin'): ?>
-                                    <li><a class="dropdown-item" href="admin/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="../admin/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                                 <?php elseif ($_SESSION['user_type'] == 'recruiter'): ?>
-                                    <li><a class="dropdown-item" href="recruiter/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="recruiter/post-job.php"><i class="fas fa-plus-circle"></i> Post Job</a></li>
+                                    <li><a class="dropdown-item" href="../recruiter/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="../recruiter/post-job.php"><i class="fas fa-plus-circle"></i> Post Job</a></li>
                                 <?php else: ?>
-                                    <li><a class="dropdown-item" href="jobseeker/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="../jobseeker/dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
