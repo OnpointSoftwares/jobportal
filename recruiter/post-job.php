@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/admin_header.php'; ?>
 
     <div class="post-job-container">
         <h1 style="margin-bottom: 2rem;">Post New Job</h1>
