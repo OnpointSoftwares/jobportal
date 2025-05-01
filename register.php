@@ -1,9 +1,14 @@
 <?php
 session_start();
 require_once 'config/database.php';
+require_once 'includes/email_utils.php';
 
 $error = '';
 $success = '';
+
+function generateToken($length = 32) {
+    return bin2hex(random_bytes($length/2));
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
@@ -30,15 +35,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            
-            // Insert new user
-            $sql = "INSERT INTO users (name, email, password, user_type) VALUES (?, ?, ?, ?)";
+            // Generate verification token
+            $token = generateToken();
+            // Insert new user with unverified status
+            $sql = "INSERT INTO users (name, email, password, user_type, email_verified, verification_token) VALUES (?, ?, ?, ?, 0, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssss", $name, $email, $hashed_password, $user_type);
+            $stmt->bind_param("sssss", $name, $email, $hashed_password, $user_type, $token);
             
             if ($stmt->execute()) {
-                $success = "Registration successful! Please login.";
-                header("refresh:2;url=login.php");
+                // Send verification email
+                $verify_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/verify_email.php?token=$token";
+                $subject = "Verify your email address";
+                $message = "<p>Hello $name,</p><p>Thank you for registering. Please verify your email by clicking the link below:</p>";
+                $message .= "<p><a href='$verify_link'>$verify_link</a></p>";
+                $message .= "<p>If you did not register, please ignore this email.</p>";
+                send_email($email, $subject, $message);
+                $success = "Registration successful! Please check your email to verify your account.";
+                // Do not redirect until verified
             } else {
                 $error = "Error registering user";
             }

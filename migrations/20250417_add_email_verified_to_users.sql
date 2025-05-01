@@ -1,0 +1,2 @@
+ALTER TABLE users ADD COLUMN email_verified TINYINT(1) DEFAULT 0;
+ALTER TABLE users ADD COLUMN verification_token VARCHAR(64) DEFAULT NULL;
