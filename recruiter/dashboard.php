@@ -317,7 +317,12 @@ if ($company) {
     </div>
 
     <?php include '../includes/bootstrap_footer.php'; ?>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (required for some Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script>
         // Tab switching functionality
         const tabs = document.querySelectorAll('.tab');

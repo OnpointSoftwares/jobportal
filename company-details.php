@@ -15,7 +15,7 @@ $sql = "SELECT * FROM company_profiles WHERE id = $company_id";
 $result = $conn->query($sql);
 
 if ($result->num_rows === 0) {
-    header('Location: companies.php');
+    header('Location: company-not-found.php');
     exit();
 }
 

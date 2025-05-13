@@ -84,7 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             $success = "Company profile " . ($company ? "updated" : "created") . " successfully!";
-            header("refresh:2;url=dashboard.php");
+            // Redirect after successful submission
+            echo "<script>
+                  setTimeout(function() {
+                      window.location.href = 'dashboard.php';
+                  }, 2000);
+                  </script>";
         } else {
             throw new Exception("Error saving company profile");
         }
@@ -170,12 +175,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #dc2626;
             margin-bottom: 1rem;
             text-align: center;
+            padding: 10px;
+            background-color: #fef2f2;
+            border-radius: 5px;
+            border: 1px solid #fee2e2;
         }
 
         .success-message {
             color: #059669;
             margin-bottom: 1rem;
             text-align: center;
+            padding: 10px;
+            background-color: #ecfdf5;
+            border-radius: 5px;
+            border: 1px solid #d1fae5;
         }
     </style>
 </head>
@@ -228,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="logo">Company Logo</label>
                     <input type="file" id="logo" name="logo" accept="image/*" onchange="previewLogo(this)">
-                    <?php if (isset($company['logo_path'])): ?>
+                    <?php if (isset($company['logo_path']) && $company['logo_path']): ?>
                         <img src="<?php echo htmlspecialchars('../' . $company['logo_path']); ?>" 
                              alt="Current company logo" class="logo-preview" id="logoPreview">
                     <?php else: ?>
@@ -237,15 +250,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php endif; ?>
                 </div>
 
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="submit-btn" >
                     <?php echo $company ? 'Update Profile' : 'Create Profile'; ?>
                 </button>
             </form>
         </div>
     </div>
 
-    <?php include '../includes/bootstrap_footer.php'; ?>
-
+    <?php //include '../includes/bootstrap_footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (required for some Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script>
         function previewLogo(input) {
             const preview = document.getElementById('logoPreview');
@@ -262,16 +280,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
-        // Form validation
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const companyName = document.getElementById('company_name').value.trim();
-            const description = document.getElementById('description').value.trim();
-            const industry = document.getElementById('industry').value.trim();
-            const location = document.getElementById('location').value.trim();
-
-            if (!companyName || !description || !industry || !location) {
-                e.preventDefault();
-                alert('Please fill in all required fields');
+        // Reset submit button state if there was an error or success message
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorMessage = document.querySelector('.error-message');
+            const successMessage = document.querySelector('.success-message');
+            const submitButton = document.querySelector('button[type="submit"]');
+            
+            if ((errorMessage || successMessage) && submitButton) {
+                submitButton.innerHTML = '<?php echo $company ? "Update Profile" : "Create Profile"; ?>';
+                submitButton.disabled = false;
             }
         });
     </script>
