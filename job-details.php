@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id']) && $_SE
 
     <!-- Footer -->
     <?php
-    include('includes/bootstrap_footer.php');
+    //include('includes/bootstrap_footer.php');
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

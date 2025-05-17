@@ -105,7 +105,7 @@
         };
 
         // Add loading spinner to buttons when clicked
-        document.querySelectorAll('button[type="submit"]').forEach(button => {
+        /*document.querySelectorAll('button[type="submit"]').forEach(button => {
             button.addEventListener('click', function() {
                 if (this.form && this.form.checkValidity()) {
                     // Store the original button text
@@ -122,7 +122,7 @@
                     }, 5000); // 5 seconds timeout
                 }
             });
-        });
+        });*/
 
         // Animate elements on scroll
         function animateOnScroll() {

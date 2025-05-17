@@ -1,8 +1,20 @@
-# Job Portal Web Application
+# Job Portal Web Application 🚀
 
-A modern job portal web application built with PHP, MySQL, HTML, CSS, and JavaScript. This platform connects job seekers with recruiters, providing a seamless experience for job searching and recruitment.
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/jobportal?style=for-the-badge&logo=github)](https://github.com/yourusername/jobportal/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/jobportal?style=for-the-badge&logo=github)](https://github.com/yourusername/jobportal/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/yourusername/jobportal?style=for-the-badge&logo=github)](https://github.com/yourusername/jobportal/issues)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Features
+A modern, feature-rich job portal web application built with PHP, MySQL, and modern web technologies. This platform bridges the gap between job seekers and employers, offering a seamless recruitment experience with powerful search capabilities and real-time updates.
+
+## 📊 Project Stats
+
+<div align="center">
+  <img width="48%" src="https://github-readme-stats.vercel.app/api/pin/?username=OnpointSoftwares&repo=jobportal&theme=react" />
+  <img width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=OnpointSoftwares&repo=jobportal&layout=compact&theme=react" />
+</div>
+
+## ✨ Key Features
 
 ### For Job Seekers
 - User registration and authentication
@@ -20,7 +32,25 @@ A modern job portal web application built with PHP, MySQL, HTML, CSS, and JavaSc
 - Shortlist candidates
 - Contact applicants directly
 
-## Technical Stack
+## 🛠️ Technical Stack
+
+### Frontend
+- HTML5, CSS3, JavaScript (ES6+)
+- Responsive Design (Mobile-first approach)
+- AJAX for seamless data loading
+- Bootstrap 5 for UI components
+
+### Backend
+- PHP 8.0+
+- MySQL 5.7+ (InnoDB)
+- Apache/Nginx web server
+- RESTful API architecture
+
+### Development Tools
+- Git for version control
+- Composer for dependency management
+- PHP_CodeSniffer for code quality
+- GitHub Actions for CI/CD
 
 - Frontend: HTML5, CSS3, JavaScript
 - Backend: PHP
@@ -80,13 +110,39 @@ jobportal/
 - CSRF protection
 - XSS prevention
 
-## Contributing
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Job Search
+![Job Search](screenshots/jobsearch.png)
+
+### User Login
+![Login Page](screenshots/login.png)
+
+## 🤝 Contributing
+
+We welcome contributions from the community! To contribute to this project:
 
 1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## License
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 📫 Contact
+
+Project Link: [https://github.com/OnpointSoftwares/jobportal](https://github.com/OnpointSoftwares/jobportal)
+
+## 🙏 Acknowledgments
+
+- [Font Awesome](https://fontawesome.com/) for the awesome icons
+- [Bootstrap](https://getbootstrap.com/) for the responsive design framework
+- [GitHub Readme Stats](https://github.com/OnpointSoftwares/github-readme-stats) for the stats cards
